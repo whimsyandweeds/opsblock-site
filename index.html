@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OPSBLOCK — Pick the exact blocks your business needs</title>
+  <meta name="description" content="Your business has holes. We have the blocks. Modular services for $1M–$20M companies. No packages. No fluff." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0A0A0A;
+      --paper: #F5F1E8;
+      --accent: #FF3B30;
+      --accent-dim: rgba(255, 59, 48, 0.12);
+      --muted: #8A8780;
+      --card: #121212;
+      --border: #1F1F1F;
+      --surface: #161616;
+      --font: 'Inter', system-ui, sans-serif;
+      --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--paper);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.5rem; background: rgba(10,10,10,0.85); backdrop-filter: blur(16px);
+      border-bottom: 1px solid transparent; transition: border-color 0.3s;
+    }
+    header.scrolled { border-bottom-color: var(--border); }
+    .logo { display: flex; align-items: center; gap: 0.55rem; font-family: var(--display); font-weight: 700; font-size: 1.15rem; letter-spacing: 0.06em; }
+    .logo-mark { width: 10px; height: 10px; background: var(--accent); border-radius: 1px; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; }
+    .nav-links a { font-size: 0.8rem; font-weight: 500; color: var(--muted); transition: color 0.15s; }
+    .nav-links a:hover { color: var(--paper); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.7rem 1.35rem; font-size: 0.85rem; font-weight: 600; border-radius: 4px; transition: all 0.15s; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #e6352b; }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--paper); }
+    .btn-ghost:hover { border-color: var(--muted); }
+    .btn-sm { padding: 0.5rem 1rem; font-size: 0.8rem; }
+
+    .hero {
+      position: relative; min-height: 100vh; display: flex; align-items: center;
+      padding: 6rem 1.5rem 4rem; overflow: hidden;
+    }
+    .hero-video {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+      opacity: 0.55;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.6) 50%, rgba(10,10,10,0.3) 100%);
+      z-index: 1;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 640px; }
+    .eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+    .hero h1 {
+      font-family: var(--display); font-weight: 800; font-size: clamp(2.8rem, 7vw, 4.5rem);
+      line-height: 0.95; letter-spacing: 0.01em; margin-bottom: 1.5rem;
+    }
+    .hero p { font-size: 1.05rem; color: var(--muted); max-width: 480px; margin-bottom: 2rem; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 3.5rem; }
+    .hero-stats {
+      display: flex; gap: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    }
+    .stat strong { display: block; font-family: var(--display); font-size: 1.6rem; font-weight: 700; letter-spacing: 0.02em; }
+    .stat span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+    h2 { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4.5vw, 3rem); line-height: 0.95; letter-spacing: 0.01em; margin-bottom: 1.25rem; }
+
+    .leak {
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: center;
+    }
+    .leak-img { border-radius: 6px; overflow: hidden; }
+    .leak-img img { width: 100%; height: auto; }
+
+    .position { text-align: center; }
+    .position h2 { margin-bottom: 2.5rem; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+      padding: 1.75rem 1.5rem; text-align: left;
+    }
+    .card-num { font-family: var(--display); font-weight: 700; font-size: 1.1rem; color: var(--accent); margin-bottom: 0.75rem; }
+    .card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .card p { font-size: 0.9rem; color: var(--muted); }
+
+    .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .pillar { text-align: left; }
+    .pillar h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .pillar p { font-size: 0.85rem; color: var(--muted); }
+
+    .menu-section { background: var(--surface); }
+    .menu-intro { max-width: 560px; margin-bottom: 2rem; color: var(--muted); font-size: 0.95rem; }
+    .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.75rem; }
+    .filter-btn {
+      padding: 0.45rem 1rem; font-size: 0.8rem; font-weight: 500; border-radius: 999px;
+      border: 1px solid var(--border); color: var(--muted); transition: all 0.15s;
+    }
+    .filter-btn.active, .filter-btn:hover { background: var(--paper); color: var(--bg); border-color: var(--paper); }
+
+    .menu-grid {
+      display: grid; grid-template-columns: 1fr 1fr 280px; gap: 1.25rem; align-items: start;
+    }
+    .blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .block-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+      padding: 1.35rem; display: flex; flex-direction: column; gap: 0.75rem;
+      transition: border-color 0.15s;
+    }
+    .block-card:hover { border-color: #333; }
+    .block-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .block-icon {
+      width: 32px; height: 32px; border-radius: 6px; background: var(--surface);
+      display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+    }
+    .block-tag {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.2rem 0.45rem; border: 1px solid var(--accent); color: var(--accent); border-radius: 3px;
+    }
+    .block-card h3 { font-size: 1.05rem; font-weight: 600; }
+    .block-price { font-size: 0.95rem; font-weight: 600; }
+    .block-price span { font-size: 0.8rem; font-weight: 400; color: var(--muted); }
+    .block-fee { font-size: 0.8rem; color: var(--accent); }
+    .block-desc { font-size: 0.85rem; color: var(--muted); flex: 1; }
+    .block-actions { display: flex; gap: 0.5rem; margin-top: 0.25rem; }
+    .block-actions .btn { flex: 1; }
+
+    .stack-panel {
+      position: sticky; top: 80px; background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.35rem;
+    }
+    .stack-panel h3 { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em; margin-bottom: 0.25rem; }
+    .stack-count { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; }
+    .stack-totals { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+    .stack-total label { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .stack-total strong { display: block; font-size: 1.1rem; font-weight: 600; }
+    .stack-total small { font-size: 0.75rem; color: var(--muted); }
+    .stack-empty { font-size: 0.85rem; color: var(--muted); margin: 1rem 0; }
+    .stack-list { list-style: none; margin: 0.75rem 0; max-height: 180px; overflow-y: auto; }
+    .stack-list li {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.4rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem;
+    }
+    .stack-list button { color: var(--muted); font-size: 0.75rem; }
+    .stack-list button:hover { color: var(--accent); }
+    .tower {
+      display: flex; flex-direction: column-reverse; align-items: center; gap: 3px;
+      min-height: 60px; margin: 1rem 0;
+    }
+    .tower-block {
+      width: 48px; height: 18px; background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
+      border: 1px solid #333; border-radius: 2px; box-shadow: 0 0 8px rgba(255,59,48,0.25);
+      animation: dropIn 0.35s ease;
+    }
+    @keyframes dropIn { from { transform: translateY(-12px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .stack-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+    .stack-actions .btn { flex: 1; }
+
+    .scope-panel {
+      display: none; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+      padding: 1rem; margin-top: 0.75rem; font-size: 0.85rem;
+    }
+    .scope-panel.open { display: block; }
+    .scope-panel h4 { font-size: 0.8rem; font-weight: 600; margin: 0.75rem 0 0.35rem; color: var(--accent); }
+    .scope-panel ul { padding-left: 1.1rem; color: var(--muted); }
+    .scope-panel li { margin-bottom: 0.25rem; }
+
+    .engage { background: var(--bg); }
+    .engage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 0.35rem; }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 0.7rem 0.9rem; background: var(--card); border: 1px solid var(--border);
+      border-radius: 4px; color: var(--paper); font-size: 0.9rem; font-family: inherit;
+    }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
+    .rev-btns { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .rev-btn {
+      padding: 0.4rem 0.8rem; font-size: 0.8rem; border: 1px solid var(--border); border-radius: 4px;
+      color: var(--muted);
+    }
+    .rev-btn.active { border-color: var(--accent); color: var(--paper); background: var(--accent-dim); }
+    .brief-preview {
+      background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+      padding: 1.25rem; font-family: ui-monospace, monospace; font-size: 0.8rem;
+      white-space: pre-wrap; color: var(--muted); max-height: 320px; overflow-y: auto;
+    }
+
+    footer {
+      padding: 2.5rem 1.5rem; border-top: 1px solid var(--border); text-align: center;
+      font-size: 0.8rem; color: var(--muted);
+    }
+
+    .toast {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--paper); color: var(--bg); padding: 0.7rem 1.25rem; border-radius: 6px;
+      font-size: 0.85rem; font-weight: 500; opacity: 0; pointer-events: none; transition: all 0.25s; z-index: 300;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 900px) {
+      .leak, .menu-grid, .engage-grid, .cards, .pillars { grid-template-columns: 1fr; }
+      .blocks { grid-template-columns: 1fr; }
+      .stack-panel { position: static; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid var(--border); }
+      .menu-btn { display: block; }
+    }
+    .menu-btn { display: none; font-size: 1.25rem; }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <a href="#" class="logo"><span class="logo-mark"></span> OPSBLOCK</a>
+    <nav class="nav-links" id="nav">
+      <a href="#menu">Menu</a>
+      <a href="#approach">Approach</a>
+      <a href="#engage">Engage</a>
+      <a href="#engage" class="btn btn-primary btn-sm">Brief a stack</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+  </header>
+
+  <section class="hero">
+    <video class="hero-video" autoplay loop muted playsinline poster="assets/cube-red.png">
+      <source src="assets/blocks-video.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="eyebrow">Modular business services</p>
+      <h1>PICK THE EXACT<br>BLOCKS YOUR<br>BUSINESS NEEDS.</h1>
+      <p>Established companies don’t need another full-time seat or an all-in package. Opsblock is the menu — collections, books, payables, the front desk, brand, web, and a fractional CFO. Take the blocks that close a hole. The ranges are published.</p>
+      <div class="hero-ctas">
+        <a href="#engage" class="btn btn-primary">Start with a diagnostic</a>
+        <a href="#menu" class="btn btn-ghost">See the eight blocks</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>8</strong><span>Public blocks</span></div>
+        <div class="stat"><strong>$1–20M+</strong><span>Built for</span></div>
+        <div class="stat"><strong>15–25%</strong><span>Success fee</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="leak-section">
+    <div class="container leak">
+      <div>
+        <p class="section-label">The leak</p>
+        <h2>CASH LEAVES THROUGH<br>THE BORING CRACKS.</h2>
+        <p style="color:var(--muted);max-width:420px">Aging receivables. Invoices nobody coded. A close that slips. A phone that isn’t answered. Opsblock sells the block that plugs the specific hole — not a department you have to invent.</p>
+      </div>
+      <div class="leak-img">
+        <img src="assets/leak-money.png" alt="Cash leaking through cracks in industrial blocks" />
+      </div>
+    </div>
+  </section>
+
+  <section id="approach" class="position">
+    <div class="container">
+      <p class="section-label">Position</p>
+      <h2>WHAT THIS IS NOT.</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="card-num">01</div>
+          <h3>A full-time hire</h3>
+          <p>One seat, one skill, salary, and a ramp. Right when the work is truly full-time. Wrong when you need three kinds of help for ten hours a week.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">02</div>
+          <h3>An all-in package</h3>
+          <p>You fund the parts you will not use so the seller can keep a tidy menu. The invoice is simple. The fit is not.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">03</div>
+          <h3>Blocks</h3>
+          <p>A defined scope, a published range, and permission to stop at one. Add the next block when the first one proves the hole was real.</p>
+        </div>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <h4>Published ranges</h4>
+          <p>You see the band before you talk. No discovery theater required to get a number.</p>
+        </div>
+        <div class="pillar">
+          <h4>Success fees where it fits</h4>
+          <p>Collections and diagnostics can carry a success component. You pay for cash that actually arrives.</p>
+        </div>
+        <div class="pillar">
+          <h4>One door at a time</h4>
+          <p>Most companies start with one block. The rest of the menu stays available.</p>
+        </div>
+        <div class="pillar">
+          <h4>No lock-in</h4>
+          <p>Month-to-month on retainers. Project work has a clear finish line.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu" class="menu-section">
+    <div class="container">
+      <p class="section-label">Public menu</p>
+      <h2>THE EIGHT BLOCKS.</h2>
+      <p class="menu-intro">These are the starting ranges for established small and midsize companies. Add a block to the stack to see the retainer and the one-time band side by side. It is a planning range, not a signed quote.</p>
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All eight</button>
+        <button class="filter-btn" data-filter="entry">Entry points</button>
+        <button class="filter-btn" data-filter="retainer">Retainers</button>
+        <button class="filter-btn" data-filter="project">Projects</button>
+        <button class="filter-btn" data-filter="advanced">Advanced</button>
+      </div>
+      <div class="menu-grid">
+        <div class="blocks" id="blocks"></div>
+        <aside class="stack-panel">
+          <h3>YOUR STACK</h3>
+          <p class="stack-count" id="stackCount">0 blocks</p>
+          <div class="tower" id="tower"></div>
+          <div class="stack-totals">
+            <div class="stack-total">
+              <label>Retainer</label>
+              <strong id="retTotal">—</strong>
+              <small>per month</small>
+            </div>
+            <div class="stack-total">
+              <label>Project</label>
+              <strong id="projTotal">—</strong>
+              <small>one-time</small>
+            </div>
+          </div>
+          <ul class="stack-list" id="stackList"></ul>
+          <p class="stack-empty" id="stackEmpty">Nothing selected. The menu is the product. Most companies should start with one door, not eight.</p>
+          <div class="stack-actions">
+            <button class="btn btn-ghost btn-sm" id="clearStack">Clear</button>
+            <a href="#engage" class="btn btn-primary btn-sm">Brief this</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="engage" class="engage">
+    <div class="container engage-grid">
+      <div>
+        <p class="section-label">Engage</p>
+        <h2>PUT A NAME<br>ON THE STACK.</h2>
+        <p style="color:var(--muted);margin-bottom:1.5rem">This stays on your device. Copy the brief or save it. When you’re ready, send it to the address on the flyer.</p>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" id="briefName" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label>Company</label>
+          <input type="text" id="briefCompany" placeholder="Company name" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="briefEmail" placeholder="you@company.com" />
+        </div>
+        <div class="form-group">
+          <label>Revenue band</label>
+          <div class="rev-btns">
+            <button type="button" class="rev-btn" data-val="Under $1M">Under $1M</button>
+            <button type="button" class="rev-btn" data-val="$1–5M">$1–5M</button>
+            <button type="button" class="rev-btn" data-val="$5–10M">$5–10M</button>
+            <button type="button" class="rev-btn" data-val="$10–20M">$10–20M</button>
+            <button type="button" class="rev-btn" data-val="$20M+">$20M+</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Note (optional)</label>
+          <textarea id="briefNote" rows="3" placeholder="What’s leaking?"></textarea>
+        </div>
+        <div style="display:flex;gap:0.5rem;margin-top:1rem">
+          <button class="btn btn-primary" id="saveBrief">Save on this device</button>
+          <button class="btn btn-ghost" id="copyBrief">Copy brief</button>
+        </div>
+      </div>
+      <div>
+        <p class="section-label">Preview</p>
+        <div class="brief-preview" id="briefPreview">OPSBLOCK BRIEF\n────────────────────────────\nNothing selected yet.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>OPSBLOCK · Modular services for established companies · Planning ranges, not signed quotes</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+const BLOCKS = [
+  {id:'diagnostic',name:'Business Diagnostic',price:'$1,000–$3,000',unit:'one-time',fee:null,tag:'ENTRY',filter:['entry','project'],icon:'🔍',
+   desc:'A structured review of operations, finance, and systems. The point is the biggest holes and the cash leaks, not a binder.',
+   scope:{Focused:['Kickoff call + document request','90-minute diagnostic session','Written findings + priority map'],Standard:['Everything in Focused','Systems walkthrough','Cash-flow snapshot','30-day action plan'],Comprehensive:['Everything in Standard','Full process mapping','Vendor & tooling review','Implementation roadmap']}},
+  {id:'collections',name:'Collections',price:'$300–$800',unit:'/ month',fee:'+ 15–25% of amounts actually recovered',tag:'ENTRY',filter:['entry','retainer'],icon:'📦',
+   desc:'Managed recovery of overdue receivables. The success fee applies only to cash that actually comes in.',
+   scope:{Focused:['Aging review','Standard dunning sequence','Weekly recovery report'],Standard:['Everything in Focused','Custom scripts by age band','Dispute triage','Monthly performance call'],Comprehensive:['Everything in Standard','Negotiation support','Legal handoff coordination','Dashboard access']}},
+  {id:'ap',name:'Accounts Payable',price:'$400–$900',unit:'/ month',fee:'Base volume, then clear tiers',tag:null,filter:['retainer'],icon:'📄',
+   desc:'Invoice intake, coding, approval routing, payment scheduling, and basic vendor follow-up.',
+   scope:{Focused:['Invoice capture & coding','Approval routing','Payment batch prep'],Standard:['Everything in Focused','Vendor inquiries','Monthly AP report','Basic reconciliation'],Comprehensive:['Everything in Standard','Policy enforcement','Cash forecasting input','Quarterly vendor review']}},
+  {id:'bookkeeping',name:'Bookkeeping',price:'$500–$1,500',unit:'/ month',fee:null,tag:null,filter:['retainer'],icon:'📊',
+   desc:'Transaction categorization, bank and card reconciliations, and a standard monthly P&L and balance sheet.',
+   scope:{Focused:['Transaction categorization','Bank reconciliations','Monthly P&L'],Standard:['Everything in Focused','Balance sheet','Credit card recs','Month-end close checklist'],Comprehensive:['Everything in Standard','Custom reports','Multi-entity support','Quarterly review call']}},
+  {id:'receptionist',name:'Virtual Receptionist',price:'$400–$1,200',unit:'/ month',fee:null,tag:null,filter:['retainer'],icon:'🎧',
+   desc:'Live or scripted front-desk coverage so calls and inquiries don’t fall through.',
+   scope:{Focused:['Business-hours coverage','Scripted intake','Message relay'],Standard:['Everything in Focused','Appointment scheduling','CRM note logging','After-hours options'],Comprehensive:['Everything in Standard','Multi-line handling','Escalation paths','Weekly call summary']}},
+  {id:'branding',name:'Branding Package',price:'$1,500–$4,000',unit:'one-time',fee:null,tag:null,filter:['project'],icon:'🎨',
+   desc:'Identity system for companies that have outgrown the original logo and need something that can scale.',
+   scope:{Focused:['Logo refinement or new mark','Color + type system','Basic usage guide'],Standard:['Everything in Focused','Business card + letterhead','Social templates','Brand board'],Comprehensive:['Everything in Standard','Full brand book','Icon set','Launch assets']}},
+  {id:'website',name:'Website',price:'$2,500–$8,000',unit:'one-time',fee:null,tag:null,filter:['project'],icon:'🌐',
+   desc:'A clean, fast site that does the job — not a six-month redesign project.',
+   scope:{Focused:['Up to 5 pages','Mobile-first build','Contact form','Basic SEO'],Standard:['Everything in Focused','CMS setup','Analytics','Speed optimization'],Comprehensive:['Everything in Standard','Custom sections','Integrations','30-day support']}},
+  {id:'cfo',name:'Fractional CFO',price:'$1,500–$4,000',unit:'/ month',fee:null,tag:'ADVANCED',filter:['advanced','retainer'],icon:'📈',
+   desc:'Financial leadership without the full-time seat. Forecasting, cash discipline, and board-ready numbers.',
+   scope:{Focused:['Monthly financial package','Cash forecast','1 strategy call'],Standard:['Everything in Focused','KPI dashboard','Budget vs actual','Bi-weekly calls'],Comprehensive:['Everything in Standard','Board materials','Fundraising support','Scenario modeling']}}
+];
+
+let stack = new Set();
+let currentFilter = 'all';
+let selectedRevenue = '';
+
+function renderBlocks() {
+  const el = document.getElementById('blocks');
+  const filtered = currentFilter === 'all' ? BLOCKS : BLOCKS.filter(b => b.filter.includes(currentFilter));
+  el.innerHTML = filtered.map(b => {
+    const inStack = stack.has(b.id);
+    return `<div class="block-card" data-id="${b.id}">
+      <div class="block-top">
+        <div class="block-icon">${b.icon}</div>
+        ${b.tag ? `<span class="block-tag">${b.tag}</span>` : `<span style="font-size:0.7rem;color:var(--muted)">${String(BLOCKS.indexOf(b)+1).padStart(2,'0')}</span>`}
+      </div>
+      <h3>${b.name}</h3>
+      <div class="block-price">${b.price} <span>${b.unit}</span></div>
+      ${b.fee ? `<div class="block-fee">${b.fee}</div>` : ''}
+      <p class="block-desc">${b.desc}</p>
+      <div class="block-actions">
+        <button class="btn ${inStack ? 'btn-ghost' : 'btn-primary'} btn-sm" onclick="toggleBlock('${b.id}')">${inStack ? 'In stack' : 'Add to stack'}</button>
+        <button class="btn btn-ghost btn-sm" onclick="toggleScope('${b.id}')">Scope</button>
+      </div>
+      <div class="scope-panel" id="scope-${b.id}">
+        ${Object.entries(b.scope).map(([tier, items]) => `<h4>${tier}</h4><ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleBlock(id) {
+  if (stack.has(id)) stack.delete(id); else stack.add(id);
+  renderBlocks(); renderStack(); updateBrief();
+}
+
+function toggleScope(id) {
+  document.getElementById('scope-'+id).classList.toggle('open');
+}
+
+function renderStack() {
+  const count = stack.size;
+  document.getElementById('stackCount').textContent = count + ' block' + (count !== 1 ? 's' : '');
+  document.getElementById('stackEmpty').style.display = count ? 'none' : 'block';
+  const list = document.getElementById('stackList');
+  list.innerHTML = [...stack].map(id => {
+    const b = BLOCKS.find(x => x.id === id);
+    return `<li><span>${b.name}</span><button onclick="toggleBlock('${id}')">Remove</button></li>`;
+  }).join('');
+  const tower = document.getElementById('tower');
+  tower.innerHTML = [...stack].map(() => '<div class="tower-block"></div>').join('');
+
+  let retMin = 0, retMax = 0, projMin = 0, projMax = 0;
+  [...stack].forEach(id => {
+    const b = BLOCKS.find(x => x.id === id);
+    const nums = b.price.replace(/[$,]/g,'').split('–').map(Number);
+    if (b.unit.includes('month')) { retMin += nums[0]; retMax += nums[1] || nums[0]; }
+    else { projMin += nums[0]; projMax += nums[1] || nums[0]; }
+  });
+  document.getElementById('retTotal').textContent = retMin || retMax ? '$'+retMin.toLocaleString()+'–$'+retMax.toLocaleString() : '—';
+  document.getElementById('projTotal').textContent = projMin || projMax ? '$'+projMin.toLocaleString()+'–$'+projMax.toLocaleString() : '—';
+}
+
+function clearStack() {
+  stack.clear(); renderBlocks(); renderStack(); updateBrief();
+}
+
+function updateBrief() {
+  const name = document.getElementById('briefName').value || '—';
+  const company = document.getElementById('briefCompany').value || '—';
+  const email = document.getElementById('briefEmail').value || '—';
+  const note = document.getElementById('briefNote').value || '—';
+  const selected = [...stack].map(id => BLOCKS.find(b => b.id === id));
+  let retMin=0,retMax=0,projMin=0,projMax=0;
+  selected.forEach(b => {
+    const nums = b.price.replace(/[$,]/g,'').split('–').map(Number);
+    if (b.unit.includes('month')) { retMin += nums[0]; retMax += nums[1]||nums[0]; }
+    else { projMin += nums[0]; projMax += nums[1]||nums[0]; }
+  });
+  const blocksList = selected.length ? selected.map(b => '  • '+b.name+'  '+b.price+' '+b.unit).join('\n') : '  (none selected)';
+  const text = `OPSBLOCK BRIEF\n────────────────────────────\nName:     ${name}\nCompany:  ${company}\nEmail:    ${email}\nRevenue:  ${selectedRevenue||'not set'}\n\nSTACK (${selected.length} blocks)\n${blocksList}\n\nRETAINER  ${retMin||retMax?'$'+retMin.toLocaleString()+'–$'+retMax.toLocaleString()+' / mo':'—'}\nPROJECT   ${projMin||projMax?'$'+projMin.toLocaleString()+'–$'+projMax.toLocaleString()+' one-time':'—'}\n\nNOTE\n${note}\n\n────────────────────────────\nPlanning brief generated on-device.\nNot a signed quote. Final scope confirmed before work begins.`;
+  document.getElementById('briefPreview').textContent = text;
+  return text;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { JSON.parse(localStorage.getItem('opsblock_stack')||'[]').forEach(id => stack.add(id)); } catch(e) {}
+  renderBlocks(); renderStack(); updateBrief();
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderBlocks();
+  }));
+  document.querySelectorAll('.rev-btn').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('.rev-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedRevenue = btn.dataset.val;
+    updateBrief();
+  }));
+  ['briefName','briefCompany','briefEmail','briefNote'].forEach(id => document.getElementById(id).addEventListener('input', updateBrief));
+  document.getElementById('saveBrief').addEventListener('click', () => {
+    const text = updateBrief();
+    try { localStorage.setItem('opsblock_brief', text); localStorage.setItem('opsblock_stack', JSON.stringify([...stack])); showToast('Brief saved on this device'); } catch(e) { showToast('Could not save'); }
+  });
+  document.getElementById('copyBrief').addEventListener('click', () => navigator.clipboard.writeText(updateBrief()).then(() => showToast('Copied to clipboard')).catch(() => showToast('Copy failed')));
+  document.getElementById('clearStack').addEventListener('click', clearStack);
+  document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('nav').classList.toggle('open'));
+  window.addEventListener('scroll', () => document.getElementById('header').classList.toggle('scrolled', window.scrollY > 40));
+});
+  </script>
+</body>
+</html>
