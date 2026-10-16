@@ -7,7 +7,7 @@
   <meta name="description" content="Modular business services. Pick the exact blocks your company needs. Published ranges for collections, books, payables, front desk, brand, web, and fractional controller." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800;900&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #09090b;
@@ -62,7 +62,7 @@
     @media (min-width: 768px) { .hero-copy { padding: 5rem 2rem; } }
     @media (min-width: 1024px) { .hero-copy { padding: 5rem 3rem; max-width: 50%; } }
     .eyebrow { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
-    .hero h1 { margin-top: 1rem; max-width: 36rem; font-family: var(--display); font-weight: 500; font-size: clamp(3.5rem, 8vw, 6rem); line-height: 0.9; }
+    .hero h1 { margin-top: 1rem; max-width: 42rem; font-family: var(--display); font-weight: 800; font-size: clamp(4rem, 9vw, 7rem); line-height: 0.85; letter-spacing: -0.01em; text-transform: uppercase; }
     .hero p { margin-top: 1.5rem; max-width: 32rem; font-size: 1.125rem; color: var(--muted); }
     .hero-ctas { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
     @media (min-width: 640px) { .hero-ctas { flex-direction: row; } }
@@ -80,7 +80,7 @@
     .band p { margin-top: 1rem; max-width: 36rem; color: var(--muted); }
 
     section { padding: 5rem 0; }
-    h2 { font-family: var(--display); font-weight: 500; font-size: clamp(2.75rem, 5vw, 3.75rem); line-height: 0.95; }
+    h2 { font-family: var(--display); font-weight: 700; font-size: clamp(2.75rem, 5vw, 3.75rem); line-height: 0.9; letter-spacing: -0.005em; }
     .position-grid { display: grid; gap: 2.5rem; }
     @media (min-width: 1024px) { .position-grid { grid-template-columns: 4fr 8fr; } }
     .cards { display: grid; gap: 1rem; }
@@ -294,8 +294,8 @@
     </div>
   </section>
 
-  <section id="next" style="scroll-snap-align: start; background:var(--bg); border-top:1px solid var(--border);">
-    <div class="container" style="padding-top:5rem; padding-bottom:2rem;">
+  <section id="next" style="scroll-snap-align: start; min-height: 100vh;" style="background:var(--bg); border-top:1px solid var(--border); padding:5rem 0;">
+    <div class="container">
       <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:2rem; flex-wrap:wrap; margin-bottom:1.5rem;">
         <div style="max-width:40rem;">
           <p class="eyebrow" style="color:var(--faint)">Next layer</p>
@@ -306,18 +306,19 @@
       </div>
       <div id="advanced-blocks" style="margin-top:1.5rem; display:none;"></div>
     </div>
-    <figure class="band" style="min-height:24rem; margin-top:2rem;">
-      <img src="https://raw.githubusercontent.com/whimsyandweeds/OpsBlock-export/main/public/media/files.webp" alt="From the pile to the file" />
-      <div class="band-overlay"></div>
-      <figcaption class="band-content">
-        <div>
-          <p class="eyebrow" style="color:var(--accent)">The standard</p>
-          <h2>From the pile to the file.</h2>
-          <p>Collections, payables, and the archive are different blocks. They share one rule: the work has an owner, a sequence, and a place it ends.</p>
-        </div>
-      </figcaption>
-    </figure>
   </section>
+
+  <figure class="band" style="scroll-snap-align: start;">
+    <img src="https://raw.githubusercontent.com/whimsyandweeds/OpsBlock-export/main/public/media/files.webp" alt="From the pile to the file" />
+    <div class="band-overlay"></div>
+    <figcaption class="band-content">
+      <div>
+        <p class="eyebrow" style="color:var(--accent)">The standard</p>
+        <h2>From the pile to the file.</h2>
+        <p>Collections, payables, and the archive are different blocks. They share one rule: the work has an owner, a sequence, and a place it ends.</p>
+      </div>
+    </figcaption>
+  </figure>
 
   <section id="approach" style="scroll-snap-align: start;" style="border-top:1px solid var(--border)">
     <div class="container" style="display:grid;gap:2.5rem">
@@ -328,7 +329,7 @@
     </div>
   </section>
 
-  <figure class="band" style="scroll-snap-align: start; min-height:100vh;">
+  <figure class="band" style="min-height:28rem;">
     <img src="https://raw.githubusercontent.com/whimsyandweeds/OpsBlock-export/main/public/media/diagnostic.webp" alt="Diagnostic report" />
     <div class="band-overlay" style="background: linear-gradient(90deg, var(--bg) 40%, color-mix(in srgb, var(--bg) 70%, transparent) 60%, transparent 100%);"></div>
     <figcaption class="band-content" style="align-items:center;">
@@ -395,7 +396,7 @@
     </div>
   </section>
 
-  <footer style="scroll-snap-align: start;">
+  <footer>
     <div class="footer-grid">
       <div class="footer-copy">
         <div>
