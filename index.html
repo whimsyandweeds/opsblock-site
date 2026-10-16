@@ -7,7 +7,7 @@
   <meta name="description" content="Modular business services. Pick the exact blocks your company needs. Published ranges for collections, books, payables, front desk, brand, web, and fractional controller." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800;900&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #09090b;
@@ -63,7 +63,7 @@
     @media (min-width: 1024px) { .hero-copy { padding: 5rem 3rem; max-width: 50%; } }
     .eyebrow { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
     .hero .eyebrow::after { content: ""; display: block; width: 2.5rem; height: 2px; background: var(--accent); margin-top: 0.75rem; }
-    .hero h1 { margin-top: 1rem; max-width: 36rem; font-family: var(--display); font-weight: 500; font-size: clamp(3.5rem, 8vw, 6rem); line-height: 0.9; }
+    .hero h1 { margin-top: 1rem; max-width: 42rem; font-family: var(--display); font-weight: 800; font-size: clamp(4rem, 9vw, 7rem); line-height: 0.85; letter-spacing: -0.01em; text-transform: uppercase; }
     .hero p { margin-top: 1.5rem; max-width: 32rem; font-size: 1.125rem; color: var(--muted); }
     .hero-ctas { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
     @media (min-width: 640px) { .hero-ctas { flex-direction: row; } }
@@ -206,7 +206,6 @@
       </a>
       <nav class="nav-links">
         <a href="#menu">Menu</a>
-        <a href="#approach">Approach</a>
         <a href="#engage">Engage</a>
         <a href="#engage" class="btn btn-accent">Brief a stack</a>
       </nav>
@@ -280,6 +279,24 @@
     </div>
   </section>
 
+  <figure class="band" style="min-height:28rem;">
+    <img src="https://raw.githubusercontent.com/whimsyandweeds/OpsBlock-export/main/public/media/diagnostic.webp" alt="Diagnostic report" />
+    <div class="band-overlay" style="background: linear-gradient(90deg, var(--bg) 40%, color-mix(in srgb, var(--bg) 70%, transparent) 60%, transparent 100%);"></div>
+    <figcaption class="band-content" style="align-items:center;">
+      <div style="max-width:36rem; margin-left:auto; padding:2rem;">
+        <p class="eyebrow">Entry block</p>
+        <h2 style="font-size:clamp(2.25rem, 4vw, 3.25rem);">A diagnostic is a call and a short report.</h2>
+        <p style="margin-top:1rem;">Findings, in order. The cash leaks. The blocks worth buying next. Not a forty-page performance. If collections is the obvious hole, you can start there instead and skip the tour.</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-top:1.5rem;">
+          <div style="border:1px solid var(--border); padding:0.75rem 1rem; font-size:0.875rem;"><span style="color:var(--accent); margin-right:0.5rem;">■</span>Process bottlenecks</div>
+          <div style="border:1px solid var(--border); padding:0.75rem 1rem; font-size:0.875rem;"><span style="color:var(--accent); margin-right:0.5rem;">■</span>Collection gaps</div>
+          <div style="border:1px solid var(--border); padding:0.75rem 1rem; font-size:0.875rem;"><span style="color:var(--accent); margin-right:0.5rem;">■</span>Quick wins</div>
+          <div style="border:1px solid var(--border); padding:0.75rem 1rem; font-size:0.875rem;"><span style="color:var(--accent); margin-right:0.5rem;">■</span>A recommended stack</div>
+        </div>
+      </div>
+    </figcaption>
+  </figure>
+
   <section id="menu" style="scroll-snap-align: start; min-height: 100vh;">
     <div class="container">
       <div style="max-width:40rem">
@@ -321,32 +338,7 @@
     </figcaption>
   </figure>
 
-  <section id="approach" style="scroll-snap-align: start;" style="border-top:1px solid var(--border)">
-    <div class="container" style="display:grid;gap:2.5rem">
-      <div style="max-width:40rem">
-        <p class="eyebrow" style="color:var(--faint)">Approach</p>
-        <h2>Start at the hole. Then decide what else is worth buying.</h2>
-      </div>
-    </div>
-  </section>
-
-  <figure class="band" style="min-height:28rem;">
-    <img src="https://raw.githubusercontent.com/whimsyandweeds/OpsBlock-export/main/public/media/diagnostic.webp" alt="Diagnostic report" />
-    <div class="band-overlay" style="background: linear-gradient(90deg, var(--bg) 40%, color-mix(in srgb, var(--bg) 70%, transparent) 60%, transparent 100%);"></div>
-    <figcaption class="band-content" style="align-items:center;">
-      <div style="max-width:36rem; margin-left:auto; padding:2rem;">
-        <p class="eyebrow">Entry block</p>
-        <h2 style="font-size:clamp(2.25rem, 4vw, 3.25rem);">A diagnostic is a call and a short report.</h2>
-        <p style="margin-top:1rem;">Findings, in order. The cash leaks. The blocks worth buying next. Not a forty-page performance. If collections is the obvious hole, you can start there instead and skip the tour.</p>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-top:1.5rem;">
-          <div style="border:1px solid var(--border); padding:0.75rem 1rem; font-size:0.875rem;"><span style="color:var(--accent); margin-right:0.5rem;">■</span>Process bottlenecks</div>
-          <div style="border:1px solid var(--border); padding:0.75rem 1rem; font-size:0.875rem;"><span style="color:var(--accent); margin-right:0.5rem;">■</span>Collection gaps</div>
-          <div style="border:1px solid var(--border); padding:0.75rem 1rem; font-size:0.875rem;"><span style="color:var(--accent); margin-right:0.5rem;">■</span>Quick wins</div>
-          <div style="border:1px solid var(--border); padding:0.75rem 1rem; font-size:0.875rem;"><span style="color:var(--accent); margin-right:0.5rem;">■</span>A recommended stack</div>
-        </div>
-      </div>
-    </figcaption>
-  </figure>
+  
 
   <section id="engage" style="scroll-snap-align: start; min-height: 100vh;" class="engage">
     <div class="container engage-grid">
@@ -406,8 +398,7 @@
         </div>
         <div class="footer-links">
           <a href="#menu">Public menu</a>
-          <a href="#approach">Approach</a>
-          <a href="#engage">Engage</a>
+            <a href="#engage">Engage</a>
         </div>
         <p style="font-size:0.75rem;color:var(--faint)">Built for companies doing roughly $1M–$20M+, and the work above that.</p>
       </div>
