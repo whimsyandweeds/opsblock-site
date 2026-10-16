@@ -334,22 +334,47 @@
       <div>
         <p class="eyebrow">Engage</p>
         <h2>Put a name on the stack.</h2>
-        <p style="margin:1rem 0 1.5rem;color:var(--muted)">This stays on your device. Copy the brief when you’re ready.</p>
-        <div class="form-group">
-          <label>Name</label>
-          <input type="text" id="briefName" placeholder="Your name" />
+        <p style="margin:1rem 0 1.5rem;color:var(--muted)">This builds a brief from the blocks you selected and keeps it on this device. Nothing is sent to a server. Copy it when you want it in front of a person.</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="briefName" placeholder="" oninput="updateLive()" />
+          </div>
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" id="briefComp" placeholder="" oninput="updateLive()" />
+          </div>
         </div>
         <div class="form-group">
-          <label>Company</label>
-          <input type="text" id="briefComp" placeholder="Company" />
+          <label>Email</label>
+          <input type="email" id="briefEmail" placeholder="" oninput="updateLive()" />
+        </div>
+        <div class="form-group">
+          <label>Revenue band</label>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
+            <button type="button" class="btn btn-ghost rev-btn" data-rev="Under $1M" onclick="setRev(this)">Under $1M</button>
+            <button type="button" class="btn btn-ghost rev-btn" data-rev="$1M–$5M" onclick="setRev(this)">$1M–$5M</button>
+            <button type="button" class="btn btn-ghost rev-btn" data-rev="$5M–$20M" onclick="setRev(this)">$5M–$20M</button>
+            <button type="button" class="btn btn-ghost rev-btn" data-rev="$20M+" onclick="setRev(this)">$20M+</button>
+          </div>
         </div>
         <div class="form-group">
           <label>Note</label>
-          <textarea id="briefNote" rows="3" placeholder="What hole are you trying to close?"></textarea>
+          <textarea id="briefNote" rows="4" placeholder="The hole you already know about." oninput="updateLive()"></textarea>
         </div>
-        <button class="btn btn-accent" onclick="updateBrief()">Generate brief</button>
+        <button class="btn btn-accent" style="width:100%; margin-top:0.5rem;" onclick="saveBrief()">Save brief on this device</button>
       </div>
-      <pre class="brief" id="brief">Select blocks above, then generate a brief.</pre>
+      <div id="live-spec" style="border:1px solid var(--border); background:var(--bg); padding:1.5rem;">
+        <p class="eyebrow" style="color:var(--faint)">Live specification</p>
+        <h3 id="live-company" style="font-family:var(--display); font-size:2rem; margin:0.5rem 0 0.25rem;">Unnamed company</h3>
+        <p id="live-rev" style="font-size:0.875rem; color:var(--muted); margin-bottom:1.5rem;">Revenue band not set</p>
+        <div class="totals" style="margin-bottom:1.5rem;">
+          <div><label>Retainer</label><strong id="live-retainer">—</strong><small style="color:var(--muted);font-size:0.75rem">per month</small></div>
+          <div><label>Project</label><strong id="live-project">—</strong><small style="color:var(--muted);font-size:0.75rem">one-time</small></div>
+        </div>
+        <div id="live-list" style="border-top:1px solid var(--border); padding-top:1rem; margin-bottom:1.5rem; font-size:0.875rem;"></div>
+        <img src="https://raw.githubusercontent.com/whimsyandweeds/OpsBlock-export/main/public/media/studio.webp" alt="" style="width:100%; height:12rem; object-fit:cover; border:1px solid var(--border);" />
+      </div>
     </div>
   </section>
 
@@ -526,22 +551,50 @@
         </div>`;
     }
 
-    function updateBrief() {
-      const name = document.getElementById("briefName").value || "—";
-      const comp = document.getElementById("briefComp").value || "—";
-      const note = document.getElementById("briefNote").value || "";
-      const lines = stack.map(s => BLOCKS.find(b => b.id === s.id)).filter(Boolean);
-      const list = lines.map(b => `• ${b.name} — ${b.figure} ${b.unit}`).join("\n") || "(none selected)";
-      document.getElementById("brief").textContent =
-`OPSBLOCK brief
-Name: ${name}
-Company: ${comp}
-${note ? "Note: "+note+"\n" : ""}
-Stack:
-${list}
+    let revBand = "";
 
-Ranges are starting points.`;
+    function setRev(btn) {
+      document.querySelectorAll(".rev-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      revBand = btn.dataset.rev;
+      updateLive();
     }
+
+    function updateLive() {
+      const name = document.getElementById("briefName").value.trim();
+      const comp = document.getElementById("briefComp").value.trim();
+      document.getElementById("live-company").textContent = comp || "Unnamed company";
+      document.getElementById("live-rev").textContent = revBand || "Revenue band not set";
+
+      const lines = stack.map(s => BLOCKS.find(b => b.id === s.id)).filter(Boolean);
+      let mLo=0, mHi=0, oLo=0, oHi=0, hasM=false, hasO=false;
+      lines.forEach(b => {
+        if (b.monthly) { hasM=true; mLo+=b.monthly[0]; mHi+=b.monthly[1]; }
+        if (b.once) { hasO=true; oLo+=b.once[0]; oHi+=b.once[1]; }
+      });
+      const fmt = n => n.toLocaleString("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0});
+      document.getElementById("live-retainer").textContent = hasM ? fmt(mLo)+"–"+fmt(mHi) : "—";
+      document.getElementById("live-project").textContent = hasO ? fmt(oLo)+"–"+fmt(oHi) : "—";
+
+      document.getElementById("live-list").innerHTML = lines.length
+        ? lines.map(b => `<div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;"><span>${b.name}</span><span style="color:var(--muted)">${b.figure} ${b.unit}</span></div>`).join("")
+        : `<p style="color:var(--muted)">No blocks selected yet.</p>`;
+    }
+
+    function saveBrief() {
+      const data = {
+        name: document.getElementById("briefName").value,
+        company: document.getElementById("briefComp").value,
+        email: document.getElementById("briefEmail").value,
+        revenue: revBand,
+        note: document.getElementById("briefNote").value,
+        stack: stack.map(s => s.id)
+      };
+      localStorage.setItem("opsblock-brief", JSON.stringify(data));
+      alert("Brief saved on this device.");
+    }
+
+    function updateBrief() { updateLive(); }
 
     function toggleNext() {
       const el = document.getElementById("advanced-blocks");
@@ -556,6 +609,7 @@ Ranges are starting points.`;
       renderBlocks();
       renderAdvanced();
       renderStack();
+      if (typeof updateLive === "function") updateLive();
     }
     render();
   </script>
