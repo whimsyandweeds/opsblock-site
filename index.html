@@ -103,7 +103,20 @@
     @media (min-width: 1024px) { .menu-grid { grid-template-columns: 8fr 4fr; } }
     .blocks { display: grid; gap: 1rem; }
     @media (min-width: 640px) { .blocks { grid-template-columns: 1fr 1fr; } }
+    #advanced-blocks { 
+      display: grid; 
+      gap: 1rem; 
+      grid-template-columns: 1fr; 
+      max-width: 42rem; 
+    }
+    @media (min-width: 768px) { 
+      #advanced-blocks { grid-template-columns: 1fr 1fr; max-width: none; } 
+    }
     .block-card { display: flex; flex-direction: column; border: 1px solid var(--border); background: var(--surface); padding: 1.25rem; }
+    .block-card.advanced { 
+      background: linear-gradient(180deg, var(--surface) 0%, #0f0f11 100%);
+      border-color: #222; 
+    }
     .block-card.selected { border-color: var(--accent); box-shadow: 0 22px 44px -24px color-mix(in srgb, var(--accent) 80%, transparent); }
     .block-top { display: flex; justify-content: space-between; align-items: flex-start; }
     .block-icon { display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; border: 1px solid var(--border); }
@@ -418,7 +431,7 @@
       document.getElementById("advanced-blocks").innerHTML = ADVANCED.map(b => {
         const sel = stack.some(s => s.id === b.id);
         return `
-          <article class="block-card ${sel?"selected":""}" id="${b.id}">
+          <article class="block-card advanced ${sel?"selected":""}" id="${b.id}">
             <div class="block-top">
               <span class="block-icon">■</span>
               <div style="display:flex;align-items:center;gap:0.5rem">
