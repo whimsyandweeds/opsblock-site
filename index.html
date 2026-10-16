@@ -122,14 +122,8 @@
         max-width: 48rem;
       } 
     }
-    .block-card { display: flex; flex-direction: column; border: 1px solid var(--border); background: var(--surface); padding: 1.25rem; }
-    .block-card.advanced { 
-      background: linear-gradient(180deg, var(--surface) 0%, #0f0f11 100%);
-      border-color: #222; 
-      position: relative;
-      overflow: hidden;
-    }
-    .block-card.advanced .card-bg {
+    .block-card { display: flex; flex-direction: column; border: 1px solid var(--border); background: var(--surface); padding: 1.25rem; position: relative; overflow: hidden; }
+    .block-card .card-bg {
       position: absolute;
       inset: 0;
       background-size: cover;
@@ -137,15 +131,19 @@
       opacity: 0.35;
       z-index: 0;
     }
-    .block-card.advanced .card-bg::after {
+    .block-card .card-bg::after {
       content: "";
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, rgba(9,9,11,0.55) 0%, rgba(9,9,11,0.85) 50%, rgba(9,9,11,0.95) 100%);
     }
-    .block-card.advanced > *:not(.card-bg) {
+    .block-card > *:not(.card-bg) {
       position: relative;
       z-index: 1;
+    }
+    .block-card.advanced { 
+      background: linear-gradient(180deg, var(--surface) 0%, #0f0f11 100%);
+      border-color: #222; 
     }
     .block-card.selected { border-color: var(--accent); box-shadow: 0 22px 44px -24px color-mix(in srgb, var(--accent) 80%, transparent); }
     .block-top { display: flex; justify-content: space-between; align-items: flex-start; }
@@ -367,14 +365,14 @@
 
   <script>
     const CORE = [
-      {id:"diagnostic",code:"01",name:"Business Diagnostic",kind:"project",entry:true,figure:"$1,000–$3,000",unit:"one-time",once:[1000,3000],summary:"A structured review of operations, finance, and systems. The point is the biggest holes and the cash leaks, not a binder.",includes:["Short written summary of findings","Issues in priority order","Which blocks are actually worth buying","Focus on bottlenecks, collection gaps, and quick wins","Delivered as a call plus a concise report"],excludes:[]},
-      {id:"collections",code:"02",name:"Collections",kind:"retainer",entry:true,figure:"$300–$800",unit:"/ month",priceNote:"+ 15–25% of amounts actually recovered",monthly:[300,800],summary:"Managed recovery of overdue receivables. The success fee applies only to cash that actually comes in.",includes:["Structured follow-up sequence","Aging review and controlled outreach","Documented owner authorization for write-offs and communication","Scope limited to existing receivables unless you expand it"],excludes:["Does not include routine invoicing — that is Expanded AR"]},
-      {id:"payables",code:"03",name:"Accounts Payable",kind:"retainer",figure:"$400–$900",unit:"/ month",priceNote:"Base volume, then clear tiers",monthly:[400,900],summary:"Invoice intake, coding, approval routing, payment scheduling, and basic vendor follow-up.",includes:["Defined base volume — typically up to 50–100 invoices","Extra volume priced in clear tiers, not a surprise","Approval routing and payment scheduling","Basic vendor follow-up"],excludes:["Does not include full bookkeeping unless that block is added"]},
-      {id:"bookkeeping",code:"04",name:"Bookkeeping",kind:"retainer",figure:"$500–$1,500",unit:"/ month",monthly:[500,1500],summary:"Transaction categorization, bank and card reconciliations, and a standard monthly P&L and balance sheet.",includes:["Transaction categorization","Bank and credit-card reconciliations","Monthly profit and loss","Monthly balance sheet","Scope set by transaction volume and number of accounts"],excludes:["No AP or AR management unless those blocks are added","No payroll processing","No tax filing"]},
-      {id:"receptionist",code:"05",name:"Virtual Receptionist",kind:"retainer",figure:"$400–$1,200",unit:"/ month",monthly:[400,1200],summary:"Call answering, message taking, scheduling, and light email or calendar triage inside a defined hour range.",includes:["Live call answering and basic messages","Scheduling support","Light email or calendar triage","Part-time coverage unless you choose a higher tier"],excludes:["Not a full virtual assistant","Not sales work"]},
-      {id:"branding",code:"06",name:"Branding Package",kind:"project",figure:"$1,500–$4,000",unit:"one-time",once:[1500,4000],summary:"Logo, slogan, color palette, and a short brand guide. A defined number of revision rounds.",includes:["Logo, slogan, and color palette","Short brand guide","Defined revision rounds","Final files in usable formats"],excludes:["No website build","No ongoing marketing","No social media management"]},
-      {id:"website",code:"07",name:"Website",kind:"project",figure:"$2,000–$6,000",unit:"one-time",once:[2000,6000],summary:"A business site, typically 5–10 pages, built to work on a phone, with a basic contact form and a real launch.",includes:["Standard pages for a business site","Mobile-friendly layout","Basic contact form","A defined revision cycle and launch"],excludes:["Hosting, maintenance, and content updates are a separate block"]},
-      {id:"controller",code:"08",name:"Fractional Controller",kind:"retainer",figure:"$2,000–$5,000",unit:"/ month",monthly:[2000,5000],summary:"Hands-on oversight of the close, reconciliations, internal controls, and reporting. Between bookkeeping and a CFO.",includes:["Close, reconciliations, controls, and reporting","Typically 10–20 hours a month","Assumes the books are reasonably organized"],excludes:["No tax prep","No high-level strategy unless the CFO block is added"]}
+      {id:"diagnostic",code:"01",name:"Business Diagnostic",image:"media/cube-1.jpg",kind:"project",entry:true,figure:"$1,000–$3,000",unit:"one-time",once:[1000,3000],summary:"A structured review of operations, finance, and systems. The point is the biggest holes and the cash leaks, not a binder.",includes:["Short written summary of findings","Issues in priority order","Which blocks are actually worth buying","Focus on bottlenecks, collection gaps, and quick wins","Delivered as a call plus a concise report"],excludes:[]},
+      {id:"collections",code:"02",name:"Collections",image:"media/cube-2.jpg",kind:"retainer",entry:true,figure:"$300–$800",unit:"/ month",priceNote:"+ 15–25% of amounts actually recovered",monthly:[300,800],summary:"Managed recovery of overdue receivables. The success fee applies only to cash that actually comes in.",includes:["Structured follow-up sequence","Aging review and controlled outreach","Documented owner authorization for write-offs and communication","Scope limited to existing receivables unless you expand it"],excludes:["Does not include routine invoicing — that is Expanded AR"]},
+      {id:"payables",code:"03",name:"Accounts Payable",image:"media/cube-3.jpg",kind:"retainer",figure:"$400–$900",unit:"/ month",priceNote:"Base volume, then clear tiers",monthly:[400,900],summary:"Invoice intake, coding, approval routing, payment scheduling, and basic vendor follow-up.",includes:["Defined base volume — typically up to 50–100 invoices","Extra volume priced in clear tiers, not a surprise","Approval routing and payment scheduling","Basic vendor follow-up"],excludes:["Does not include full bookkeeping unless that block is added"]},
+      {id:"bookkeeping",code:"04",name:"Bookkeeping",image:"media/cube-4.jpg",kind:"retainer",figure:"$500–$1,500",unit:"/ month",monthly:[500,1500],summary:"Transaction categorization, bank and card reconciliations, and a standard monthly P&L and balance sheet.",includes:["Transaction categorization","Bank and credit-card reconciliations","Monthly profit and loss","Monthly balance sheet","Scope set by transaction volume and number of accounts"],excludes:["No AP or AR management unless those blocks are added","No payroll processing","No tax filing"]},
+      {id:"receptionist",code:"05",name:"Virtual Receptionist",image:"media/cube-5.jpg",kind:"retainer",figure:"$400–$1,200",unit:"/ month",monthly:[400,1200],summary:"Call answering, message taking, scheduling, and light email or calendar triage inside a defined hour range.",includes:["Live call answering and basic messages","Scheduling support","Light email or calendar triage","Part-time coverage unless you choose a higher tier"],excludes:["Not a full virtual assistant","Not sales work"]},
+      {id:"branding",code:"06",name:"Branding Package",image:"media/cube-1.jpg",kind:"project",figure:"$1,500–$4,000",unit:"one-time",once:[1500,4000],summary:"Logo, slogan, color palette, and a short brand guide. A defined number of revision rounds.",includes:["Logo, slogan, and color palette","Short brand guide","Defined revision rounds","Final files in usable formats"],excludes:["No website build","No ongoing marketing","No social media management"]},
+      {id:"website",code:"07",name:"Website",image:"media/cube-2.jpg",kind:"project",figure:"$2,000–$6,000",unit:"one-time",once:[2000,6000],summary:"A business site, typically 5–10 pages, built to work on a phone, with a basic contact form and a real launch.",includes:["Standard pages for a business site","Mobile-friendly layout","Basic contact form","A defined revision cycle and launch"],excludes:["Hosting, maintenance, and content updates are a separate block"]},
+      {id:"controller",code:"08",name:"Fractional Controller",image:"media/cube-3.jpg",kind:"retainer",figure:"$2,000–$5,000",unit:"/ month",monthly:[2000,5000],summary:"Hands-on oversight of the close, reconciliations, internal controls, and reporting. Between bookkeeping and a CFO.",includes:["Close, reconciliations, controls, and reporting","Typically 10–20 hours a month","Assumes the books are reasonably organized"],excludes:["No tax prep","No high-level strategy unless the CFO block is added"]}
     ];
 
     const ADVANCED = [
@@ -427,8 +425,10 @@
       const visible = CORE.filter(b => matches(b, filter));
       document.getElementById("blocks").innerHTML = visible.map(b => {
         const sel = stack.some(s => s.id === b.id);
+        const bg = b.image ? `<div class="card-bg" style="background-image:url('${b.image}')"></div>` : "";
         return `
           <article class="block-card ${sel?"selected":""}" id="${b.id}">
+            ${bg}
             <div class="block-top">
               <span class="block-icon">■</span>
               <div style="display:flex;align-items:center;gap:0.5rem">
@@ -460,10 +460,10 @@
     function renderAdvanced() {
       document.getElementById("advanced-blocks").innerHTML = ADVANCED.map(b => {
         const sel = stack.some(s => s.id === b.id);
-        const bg = b.image ? `<div class="card-bg" style="background-image:url('${b.image}')"></div>` : "";
+        const img = b.image ? `<img src="${b.image}" alt="" style="width:100%;height:8rem;object-fit:cover;margin-bottom:0.75rem;border:1px solid var(--border);" />` : "";
         return `
           <article class="block-card advanced ${sel?"selected":""}" id="${b.id}">
-            ${bg}
+            ${img}
             <div class="block-top">
               <span class="block-icon">■</span>
               <div style="display:flex;align-items:center;gap:0.5rem">
