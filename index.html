@@ -220,7 +220,7 @@
     <div class="hero-copy">
       <p class="eyebrow">Modular business services</p>
       <h1>Pick the exact blocks your business needs.</h1>
-      <p>Established companies don’t need another full-time seat or an all-in package. Opsblock is the menu — collections, books, payables, the front desk, brand, web, and a fractional controller. Take the blocks that close a hole. The ranges are published.</p>
+      <p>Established companies don’t need another full-time seat or an all-in package. Opsblock is the menu. Take the blocks that close a hole. The ranges are published.</p>
       <div class="hero-ctas">
         <button class="btn btn-accent" onclick="addAndScroll('diagnostic')">Start with a diagnostic</button>
         <a href="#menu" class="btn btn-outline">See the eight blocks</a>
@@ -240,7 +240,7 @@
       <div>
         <p class="eyebrow">The leak</p>
         <h2>Cash leaves through the boring cracks.</h2>
-        <p>Aging receivables. Invoices nobody coded. A close that slips. A phone that isn’t answered. Opsblock sells the block that plugs the specific hole — not a department you have to invent.</p>
+        <p>Aging receivables. Invoices nobody coded. A close that slips. A phone that isn’t answered.</p>
       </div>
     </figcaption>
   </figure>
@@ -286,7 +286,7 @@
       <div style="max-width:36rem; margin-left:auto; padding:2rem;">
         <p class="eyebrow">Entry block</p>
         <h2 style="font-size:clamp(2.25rem, 4vw, 3.25rem);">A diagnostic is a call and a short report.</h2>
-        <p style="margin-top:1rem;">Findings, in order. The cash leaks. The blocks worth buying next. Not a forty-page performance. If collections is the obvious hole, you can start there instead and skip the tour.</p>
+        <p style="margin-top:1rem;">Findings, in order. The cash leaks. The blocks worth buying next. If collections is the obvious hole, you can start there instead and skip the tour.</p>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-top:1.5rem;">
           <div style="border:1px solid var(--border); padding:0.75rem 1rem; font-size:0.875rem;"><span style="color:var(--accent); margin-right:0.5rem;">■</span>Process bottlenecks</div>
           <div style="border:1px solid var(--border); padding:0.75rem 1rem; font-size:0.875rem;"><span style="color:var(--accent); margin-right:0.5rem;">■</span>Collection gaps</div>
@@ -312,30 +312,31 @@
     </div>
   </section>
 
-  <section id="next" style="scroll-snap-align: start; background:var(--bg); border-top:1px solid var(--border);">
-    <div class="container" style="padding-top:4rem; padding-bottom:2rem;">
+  <section id="next" style="scroll-snap-align: start; min-height: 100vh;" style="background:var(--bg); border-top:1px solid var(--border); padding:5rem 0;">
+    <div class="container">
       <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:2rem; flex-wrap:wrap; margin-bottom:1.5rem;">
         <div style="max-width:40rem;">
           <p class="eyebrow" style="color:var(--faint)">Next layer</p>
           <h2>After you are in.</h2>
-          <p style="margin-top:1rem;color:var(--muted)">Controller, ops support, automations, custom software, and the rest. Offered once a core block is underway, or after a diagnostic. You can still preview the bands here.</p>
+          <p style="margin-top:1rem;color:var(--muted)">Controller, ops support, automations, custom software, and the rest. Offered once a core block is underway, or after a diagnostic.</p>
         </div>
         <button class="btn btn-outline" id="toggle-next" onclick="toggleNext()" style="align-self:center; border-color:var(--accent); color:var(--accent);">Show next-layer ranges</button>
       </div>
       <div id="advanced-blocks" style="margin-top:1.5rem; display:none;"></div>
     </div>
-    <figure class="band" style="min-height:20rem;">
-      <img src="https://raw.githubusercontent.com/whimsyandweeds/OpsBlock-export/main/public/media/files.webp" alt="From the pile to the file" />
-      <div class="band-overlay"></div>
-      <figcaption class="band-content">
-        <div>
-          <p class="eyebrow" style="color:var(--accent)">The standard</p>
-          <h2>From the pile to the file.</h2>
-          <p>Collections, payables, and the archive are different blocks. They share one rule: the work has an owner, a sequence, and a place it ends.</p>
-        </div>
-      </figcaption>
-    </figure>
   </section>
+
+  <figure class="band" style="scroll-snap-align: start;">
+    <img src="https://raw.githubusercontent.com/whimsyandweeds/OpsBlock-export/main/public/media/files.webp" alt="From the pile to the file" />
+    <div class="band-overlay"></div>
+    <figcaption class="band-content">
+      <div>
+        <p class="eyebrow" style="color:var(--accent)">The standard</p>
+        <h2>From the pile to the file.</h2>
+        <p>Collections, payables, and the archive are different blocks. They share one rule: the work has an owner, a sequence, and a place it ends.</p>
+      </div>
+    </figcaption>
+  </figure>
 
   
 
