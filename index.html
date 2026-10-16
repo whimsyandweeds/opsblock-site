@@ -107,20 +107,12 @@
       display: grid; 
       gap: 1rem; 
       grid-template-columns: 1fr; 
-      max-width: 42rem;
-      margin-left: auto;
-      margin-right: auto;
     }
     @media (min-width: 768px) { 
-      #advanced-blocks { 
-        grid-template-columns: 1fr 1fr; 
-        max-width: 52rem;
-      } 
+      #advanced-blocks { grid-template-columns: 1fr 1fr; } 
     }
     @media (min-width: 1024px) { 
-      #advanced-blocks { 
-        max-width: 48rem;
-      } 
+      #advanced-blocks { grid-template-columns: 1fr 1fr 1fr; } 
     }
     .block-card { display: flex; flex-direction: column; border: 1px solid var(--border); background: var(--surface); padding: 1.25rem; position: relative; overflow: hidden; }
     .block-card .card-bg {
@@ -303,12 +295,15 @@
 
   <section id="next" style="background:var(--bg); border-top:1px solid var(--border); padding:5rem 0;">
     <div class="container">
-      <div style="max-width:40rem; margin-bottom:2rem;">
-        <p class="eyebrow" style="color:var(--faint)">Next layer</p>
-        <h2>After you are in.</h2>
-        <p style="margin-top:1rem;color:var(--muted)">Controller is now on the public menu. These are the blocks that open once a core block is underway or after a diagnostic. You can still preview the ranges and scopes here.</p>
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:2rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+        <div style="max-width:40rem;">
+          <p class="eyebrow" style="color:var(--faint)">Next layer</p>
+          <h2>After you are in.</h2>
+          <p style="margin-top:1rem;color:var(--muted)">Controller, ops support, automations, custom software, and the rest. Offered once a core block is underway, or after a diagnostic. You can still preview the bands here.</p>
+        </div>
+        <button class="btn btn-outline" id="toggle-next" onclick="toggleNext()" style="align-self:center; border-color:var(--accent); color:var(--accent);">Show next-layer ranges</button>
       </div>
-      <div class="blocks" id="advanced-blocks" style="margin-top:1.5rem;"></div>
+      <div id="advanced-blocks" style="margin-top:1.5rem; display:none;"></div>
     </div>
   </section>
 
@@ -545,6 +540,14 @@ Stack:
 ${list}
 
 Ranges are starting points.`;
+    }
+
+    function toggleNext() {
+      const el = document.getElementById("advanced-blocks");
+      const btn = document.getElementById("toggle-next");
+      const open = el.style.display !== "none";
+      el.style.display = open ? "none" : "grid";
+      btn.textContent = open ? "Show next-layer ranges" : "Hide next-layer ranges";
     }
 
     function render() {
