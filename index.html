@@ -237,7 +237,7 @@
     </div>
   </section>
 
-  <figure class="band" style="min-height: 100vh;">
+  <figure class="band" style="min-height: 32rem;">
     <img src="https://raw.githubusercontent.com/whimsyandweeds/OpsBlock-export/main/public/media/leak.webp" alt="Cash leaking through cracks" />
     <div class="band-overlay"></div>
     <figcaption class="band-content">
@@ -250,7 +250,7 @@
   </figure>
 
   <section style="">
-  <figure class="band" style="min-height:70vh;">
+  <figure class="band" style="min-height:32rem;">
     <img src="https://raw.githubusercontent.com/whimsyandweeds/OpsBlock-export/main/public/media/diagnostic.webp" alt="Diagnostic report" />
     <div class="band-overlay" style="background: linear-gradient(90deg, var(--bg) 40%, color-mix(in srgb, var(--bg) 70%, transparent) 60%, transparent 100%);"></div>
     <figcaption class="band-content" style="align-items:center;">
@@ -325,8 +325,11 @@
     </div>
   </section>
 
-  <section id="next" style="min-height: 100vh; display: flex; align-items: center; background: var(--bg) url('media/footer-cube.jpg') left center / contain no-repeat; border-top:1px solid var(--border); position: relative;">
-    <div style="position:absolute; inset:0; background: linear-gradient(90deg, transparent 20%, var(--bg) 45%); pointer-events:none;"></div>
+  <section id="next" style="min-height: 100vh; display: flex; align-items: center; border-top:1px solid var(--border); position: relative; overflow: hidden;">
+    <video autoplay muted loop playsinline style="position:absolute; left:0; top:0; height:100%; width:auto; object-fit:contain; z-index:0;">
+      <source src="media/cube-spin.mp4" type="video/mp4">
+    </video>
+    <div style="position:absolute; inset:0; background: linear-gradient(90deg, transparent 25%, var(--bg) 50%); pointer-events:none; z-index:1;"></div>
     <div class="container" style="position:relative; z-index:1; padding-left: 38%;">
       <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:2rem; flex-wrap:wrap; margin-bottom:1.5rem;">
         <div style="max-width:40rem;">
