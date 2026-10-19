@@ -365,7 +365,7 @@
       <div>
         <p class="eyebrow">Engage</p>
         <h2>Put a name on the stack.</h2>
-        <p style="margin:1rem 0 1.5rem;color:var(--muted)">This builds a brief from the blocks you selected and keeps it on this device. Nothing is sent to a server. Copy it when you want it in front of a person.</p>
+        <p style="margin:1rem 0 1.5rem;color:var(--muted)">This sends your selected blocks and contact info to OpsBlock.</p>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
           <div class="form-group">
             <label>Name</label>
@@ -393,7 +393,7 @@
           <label>Note</label>
           <textarea id="briefNote" rows="4" placeholder="The hole you already know about." oninput="updateLive()"></textarea>
         </div>
-        <button class="btn btn-accent" style="width:100%; margin-top:0.5rem;" onclick="saveBrief()">Save brief on this device</button>
+        <button class="btn btn-accent" style="width:100%; margin-top:0.5rem;" onclick="sendBrief()">Send to OpsBlock</button>
       </div>
       <div id="live-spec" style="border:1px solid var(--border); background:var(--bg); padding:1.5rem;">
         <p class="eyebrow" style="color:var(--faint)">Live specification</p>
@@ -615,17 +615,39 @@
         : `<p style="color:var(--muted)">No blocks selected yet.</p>`;
     }
 
-    function saveBrief() {
-      const data = {
-        name: document.getElementById("briefName").value,
-        company: document.getElementById("briefComp").value,
-        email: document.getElementById("briefEmail").value,
-        revenue: revBand,
-        note: document.getElementById("briefNote").value,
-        stack: stack.map(s => s.id)
+    function sendBrief() {
+      const name = document.getElementById("briefName").value;
+      const company = document.getElementById("briefComp").value;
+      const email = document.getElementById("briefEmail").value;
+      const note = document.getElementById("briefNote").value;
+      const stackNames = stack.map(s => s.name).join(", ") || "None";
+      const body = {
+        name: name,
+        company: company,
+        email: email,
+        revenue: revBand || "Not set",
+        note: note,
+        blocks: stackNames,
+        _subject: "OpsBlock brief from " + (company || name || "site"),
+        _template: "table",
+        _captcha: "false"
       };
-      localStorage.setItem("opsblock-brief", JSON.stringify(data));
-      alert("Brief saved on this device.");
+      fetch("https://formsubmit.co/ajax/whimsyandweeds@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(body)
+      }).then(r => r.json()).then(data => {
+        // Also send to second address
+        return fetch("https://formsubmit.co/ajax/opsblock.io@gmail.com", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(body)
+        });
+      }).then(() => {
+        alert("Sent to OpsBlock.");
+      }).catch(() => {
+        alert("Could not send. Try again.");
+      });
     }
 
     function updateBrief() { updateLive(); }
