@@ -114,6 +114,8 @@
       gap: 1rem; 
       grid-template-columns: 1fr; 
     }
+    #next.expanded .container { padding-left: 1.25rem !important; }
+    #next.expanded video { opacity: 0.15; }
     @media (min-width: 768px) { 
       #advanced-blocks { grid-template-columns: 1fr 1fr; } 
     }
@@ -660,9 +662,11 @@
     function toggleNext() {
       const el = document.getElementById("advanced-blocks");
       const btn = document.getElementById("toggle-next");
+      const section = document.getElementById("next");
       const open = el.style.display !== "none";
       el.style.display = open ? "none" : "grid";
       btn.textContent = open ? "Show next-layer ranges" : "Hide next-layer ranges";
+      section.classList.toggle("expanded", !open);
     }
 
     function render() {
