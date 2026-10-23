@@ -330,7 +330,12 @@
       <source src="media/cube-spin.mp4" type="video/mp4">
     </video>
     <div style="position:absolute; inset:0; background: linear-gradient(90deg, transparent 25%, var(--bg) 50%); pointer-events:none; z-index:1;"></div>
-    <div class="container" style="position:relative; z-index:1; padding-left: 38%;">
+    <div class="container" style="position:relative; z-index:1;">
+      <style>
+        @media (min-width: 768px) {
+          #next .container { padding-left: 38%; }
+        }
+      </style>
       <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:2rem; flex-wrap:wrap; margin-bottom:1.5rem;">
         <div style="max-width:40rem;">
           <p class="eyebrow" style="color:var(--faint)">Next layer</p>
